@@ -7,6 +7,7 @@
 #define LEFTEDGE 0
 #define RIGHTEDGE 60
 #define ROW 40
+#define BUFFERSIZE 4096
 
 void welcome();
 
@@ -64,6 +65,11 @@ main()
 			break;
 		case '3':
 			break;
+		case '4':
+			break;
+		case 'q':
+			welcome();
+			break;
 
 	}
 
@@ -77,18 +83,25 @@ main()
 
 void welcome()
 {
+	char *hello[8];
 	char* info[8];
+	char Buf[BUFFERSIZE];
+//	char info2[BUFFERSIZE] ={0,};
+//	char info3[BUFFERSIZE] ={0,};
+//	char info[BUFFERSIZE] ={0,};
+
 	long long int studentID=0;
 	char bar[20]={0,};
 	char txt[5] = ".txt";
-	int fd;
-
+	int fd,n_chars;
+	int i=0;
         char messagehi[] = "hello everyone!";
         char messagepl[] = "please. take a bar code";
         char message[] = "bbic and next ya";
         char blank[] = "                                       ";
         int dir = +5;
         int pos = 0;
+	int count = 0;
 
         initscr();
         clear();
@@ -104,8 +117,10 @@ void welcome()
                 attroff(A_BLINK);
                 move(20,40);
 		refresh();
-		scanw("%ld",&studentID);
+		if(count == 5)
+			scanw("%ld",&studentID);
                 sleep(1);
+		count++;
                 move(ROW,pos);
                 addstr(blank);
                 pos += dir;
@@ -122,14 +137,32 @@ void welcome()
 	strcat(bar,txt);
 	printw("%s",bar);
 	refresh();
-	sleep(5);
-
 
 	if((fd = open(bar,O_RDONLY))==-1){
                 printw("cannot open");
 		refresh();
                 exit(1);
        	}
+
+	while((n_chars = read(fd,Buf,BUFFERSIZE) > 0)){
+		hello[i] = Buf;
+		i++;
+	}
+	i=0;
+	char *ptr = strtok(hello[0],"\n");
+	while(ptr != NULL){
+		info[i] = ptr;
+		ptr = strtok(NULL,"\n");
+		i++;
+	}
+
+	clear();
+	for(i=0;i<8;i++){
+		printw("%s\n",info[i]);
+		refresh();
+	}
+	sleep(10);
+	close(fd);
 
 
 
@@ -141,8 +174,8 @@ void welcome()
 
 
         move(0,0);
-        clear();
-        refresh();
+//        clear();
+//        refresh();
 
 
 }
