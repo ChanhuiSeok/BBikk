@@ -116,15 +116,24 @@ void welcome()
                 if(studentID != 0)
                         break;//if barcode input
         }
+	clear();
 	//change  int -> char !!!!!!
 	sprintf(bar,"%ld",studentID);
 	strcat(bar,txt);
-	printf("%s",bar);
+	printw("%s",bar);
+	refresh();
+	sleep(5);
 
-	//if((fd = open(bar,O_RDONLY))==-1){
-        //        perror(fd);
-        //        exit(1);
-        //}
+
+	if((fd = open(bar,O_RDONLY))==-1){
+                printw("cannot open");
+		refresh();
+                exit(1);
+       	}
+
+
+
+
 
 
 
