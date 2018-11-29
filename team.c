@@ -4,7 +4,6 @@
 
 int main() 
 {
-	int i, j;
 	char barcode[20];
 	scanf("%s", &barcode);
 	
