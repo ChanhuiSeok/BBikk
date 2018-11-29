@@ -1,5 +1,8 @@
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <fcntl.h>
 #include <curses.h>
 #define LEFTEDGE 0
 #define RIGHTEDGE 60
@@ -84,10 +87,8 @@ void welcome()
         char messagepl[] = "please. take a bar code";
         char message[] = "bbic and next ya";
         char blank[] = "                                       ";
-        char barcode[] = "  ";
         int dir = +5;
         int pos = 0;
-        int in_ch;
 
         initscr();
         clear();
@@ -101,9 +102,9 @@ void welcome()
                 attron(A_BLINK);
                 addstr(messagepl);
                 attroff(A_BLINK);
-                move(LINES-1,COLS-1);
-		studentID = getch();
-                refresh();
+                move(20,40);
+		refresh();
+		scanw("%ld",&studentID);
                 sleep(1);
                 move(ROW,pos);
                 addstr(blank);
@@ -130,10 +131,9 @@ void welcome()
 
 
 
-       // move(LINES,COLS);
-       // clear();
-       // refresh();
-       getch();
+        move(0,0);
+        clear();
+        refresh();
 
 
 }
