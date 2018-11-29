@@ -1,6 +1,9 @@
 #include <stdio.h>
-#include <string.h>
 #include <curses.h>
+#include <string.h>
+#include <fcntl.h>
+#include <unistd.h>
+#include <stdlib.h>
 #define LEFTEDGE 0
 #define RIGHTEDGE 60
 #define ROW 40
@@ -10,13 +13,12 @@ void welcome();
 main()
 {
 	welcome();
-
+	getch();
 	char star = '*';
 	char messagecho[] = "*****************CHOICE!******************";
 	char message1[] = "  1. Show Attendence.";
 	char message2[] = "  2. Show Library Using.";
 	char message3[] = "  3. Show Professor Counsel.";
-	char message4[] = "  4. My Diary.";
 	char messageend[] = "******************************************";
 
 	move(10,20);
@@ -28,11 +30,9 @@ main()
 	move(25,20);
 	addstr(message3);
 	move(30,20);
-	addstr(message4);
-	move(35,20);
 	addstr(messageend);
 	int i=10;
-	while(i<=35){
+	while(i<=30){
 		move(i,20);
 		addch(star);
 		move(i,61);
@@ -53,7 +53,7 @@ main()
 	{
 		case '1':
 			move(10,10);
-			addstr("fffffffddffffffffff");
+			addstr("fffffffff");
 			move(15,10);
 			addstr("eeeeeeeeeeeeeeeeeeeeeee\n");
 			break;
@@ -72,22 +72,22 @@ main()
 
 }
 
+
 void welcome()
 {
+	int fd;
 	char* info[8];
-	long int studentID=0;
+	long long int studentID = 0;
 	char bar[20]={0,};
 	char txt[5] = ".txt";
-	int fd;
-
-        char messagehi[] = "hello everyone!";
+	char messagehi[] = "hello everyone!";
         char messagepl[] = "please. take a bar code";
         char message[] = "bbic and next ya";
         char blank[] = "                                       ";
         char barcode[] = "  ";
         int dir = +5;
         int pos = 0;
-        int in_ch;
+        int flag = 0;
 
         initscr();
         clear();
@@ -115,24 +115,22 @@ void welcome()
                 if(studentID != 0)
                         break;//if barcode input
         }
-	//change  int -> char !!!!!!
+        move(LINES,COLS);
+
 	sprintf(bar,"%ld",studentID);
 	strcat(bar,txt);
-	printf("%s",bar);
 
-	//if((fd = open(bar,O_RDONLY))==-1){
-        //        perror(fd);
-        //        exit(1);
-        //}
-
+	if((fd = open(bar,O_RDONLY))==-1){
+                perror(fd);
+                exit(1);
+        }
 
 
+	clear();
+	refresh();
 
 
 
-       // move(LINES,COLS);
-       // clear();
-       // refresh();
 
 
 }
