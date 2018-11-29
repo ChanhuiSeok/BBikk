@@ -2,18 +2,17 @@
 #include<string.h>
 #include<curses.h>
 
-int main() 
+void show_counsel(long long int  barcode)
 {
-	char barcode[20];
-	scanf("%s", &barcode);
-	
 	initscr();
 
 	clear();
+	
 	move(10,20);
 	addstr("***********Counsel Content************");
 	move(13,20);
-	if (strcmp(barcode, "2017113151") == 0) {
+	
+	if (barcode == 20171131511) {
 		addstr("[Student Information]");
 		move(15,20);
 		addstr("Song Min Ju  2017113151");
@@ -25,7 +24,7 @@ int main()
 		addstr("Counsel date : 2018.05.01");
 		move(23,0);
 	}
-	else if (strcmp(barcode, "2017113135") == 0) {
+	else if (barcode == 20171131351) {
                 addstr("[Student Information]");
                 move(15,20);
                 addstr("Jung Ji U  2017113135");
@@ -39,7 +38,7 @@ int main()
 		addstr("         : 2018.11.22");
 		move(25,0);
 	      }
-	 else if (strcmp(barcode, "2017113231") == 0) {
+	 else if (barcode == 20171132311) {
                 addstr("[Student Information]");
                 move(15,20);
                 addstr("Kim Hyun Woo  2015113231");
