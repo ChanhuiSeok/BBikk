@@ -10,6 +10,8 @@
 #define BUFFERSIZE 4096
 
 void welcome();
+void show_attend(char name[], char late[],char  absent[]);
+char *info[8];
 
 main()
 {
@@ -56,10 +58,7 @@ main()
 	switch(choice)
 	{
 		case '1':
-			move(10,10);
-			addstr("fffffffddffffffffff");
-			move(15,10);
-			addstr("eeeeeeeeeeeeeeeeeeeeeee\n");
+			show_attend(info[0],info[1],info[2]);
 			break;
 		case '2':
 			break;
@@ -84,7 +83,7 @@ main()
 void welcome()
 {
 	char *hello[8];
-	char* info[8];
+//	char* info[8];
 	char Buf[BUFFERSIZE];
 //	char info2[BUFFERSIZE] ={0,};
 //	char info3[BUFFERSIZE] ={0,};
@@ -174,12 +173,27 @@ void welcome()
 
 
         move(0,0);
-//        clear();
-//        refresh();
+        clear();
+        refresh();
 
 
 }
 
-
+void show_attend(char name[], char late[], char absent[])
+{
+        clear();
+        move(10,20);
+        addstr("***********Attend Content************");
+        move(13,20);
+        printw("Student Name: %s",name);
+        move(15,20);
+        printw("Late count: %s", late);
+        move(17,20);
+        printw("Absent count: %s", absent);
+        move(19,0);
+        refresh();
+        getch();
+        endwin();
+}
 
 
