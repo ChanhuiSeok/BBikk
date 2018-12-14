@@ -9,6 +9,7 @@
 #define BUFFERSIZE 4096
 
 char * info[8];
+char barcode[50];
 
 int menu();
 int diary();
@@ -25,7 +26,7 @@ int start(){
 	WINDOW * stick2;
 	initscr();
 
-	char barcode[50];
+//	char barcode[50];
 	
 // First Page
 
@@ -178,21 +179,21 @@ int menu(char* barcode){
 	printw("%s",info[0]);
 	attroff(COLOR_PAIR(1));
 	move(2,60);
-	printw("[Go home | press 0]");
+	printw("");
 	move(4,25);
 	attron(A_BOLD);
 	printw(" S E L E C T   T H E   M E N U ");
 	attroff(A_BOLD);
 	
-	menuList = newwin(6,40,8,20);
+	menuList = newwin(7,40,8,20);
 	wborder(menuList,'*','*','*','*','*','*','*','*');
 	refresh();
 	wrefresh(menuList);
 	keypad(menuList, true);
 
-	char *choices[4] = {"         [1] Show Attendence         ", "         [2] Show Library Using       ","         [3] Show Professor Counsel   ", "         [4] Writing A Diary         "};
+	char *choices[5] = {"         [1] Show Attendence         ", "         [2] Show Library Using       ","         [3] Show Professor Counsel   ", "         [4] Writing A Diary         ","         [5] Return Home       "};
 	while(1){
-		for(j =0;j<4;j++){
+		for(j =0;j<5;j++){
 			if(j == highlight)
 				wattron(menuList, A_REVERSE);
 			mvwprintw(menuList, j+1, 1, choices[j]);
@@ -208,8 +209,8 @@ int menu(char* barcode){
 				break;
 			case KEY_DOWN:
 				highlight++;
-				if(highlight == 4)
-					highlight=3;
+				if(highlight == 5)
+					highlight=4;
 				break;
 			default:
 				break;
@@ -228,8 +229,11 @@ int menu(char* barcode){
 		counsel();
 	else if(highlight==3)
 		diary();
-	
-
+	else if(highlight==4){
+		clear();
+		start();
+	}
+				
 	refresh();
 	getch();
 	endwin();
@@ -297,6 +301,12 @@ int attend(){
 	else if(atoi(info[2])<3)
 		printw("* * * YOU ARE 'A'!! LET'S GET IT!! * * *");
 
+	move(18, 5);
+	if( (ch = getch()) == '0'){
+					
+				clear();
+				menu(barcode);
+	}
 
 }
 
@@ -312,9 +322,10 @@ int counsel(){
 	int ch;
 	char txt[50];
 	char title[50];
-
+	int back;
 	int fd;
 	int wr;
+	//keypad(stdscr, TRUE);
 	clear();
 	initscr();
 
@@ -363,8 +374,15 @@ int counsel(){
 		printw("* * * It's OKAY~! * * *");
 	else if(atoi(info[6])<=3)
 		printw("* * * Please VISIT YOUR PROFESSOR..! * * *");
-
-
+	
+	move(18,3);
+	// go back - input
+	if( (ch = getch()) == '0'){
+					
+				clear();
+				menu(barcode);
+	}
+	
 }
 
 
@@ -429,6 +447,13 @@ int library(){
 	move(9, 44);
 	printw("%s", info[4]);
 
+	move(23, 5);
+	if( (ch = getch()) == '0'){
+					
+				clear();
+				menu(barcode);
+	}
+	
 }
 
 int diary(){
@@ -511,9 +536,16 @@ int diary(){
 	move(13,13);
 //	printw("%s\n",txt);
 	
+	move(18, 5);
+	if( (ch = getch()) == '0'){
+					
+				clear();
+				menu(barcode);
+	}
 
-	ch=getch();
-	endwin();
+
+	//ch=getch();
+	//endwin();
 
 
 }
