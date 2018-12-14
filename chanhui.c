@@ -342,7 +342,7 @@ int counsel(){
 	printw(" M Y   C O U N S E L  I N F O ");
 	attroff(A_BOLD);
 	
-	my_win = newwin(10,70,10,10);
+	my_win = newwin(10,70,7,10);
 
 	box(my_win,ACS_VLINE,ACS_HLINE);
 	refresh();
@@ -352,17 +352,17 @@ int counsel(){
 	
 	wrefresh(my_win);
 	move(9,16);
-	printw("<Late Count> : %s",info[1]);
+	printw("<Professor Name> : %s",info[5]);
 	move(11,16);
-	printw("<Absent Count> : %s",info[2]);
+	printw("<Counsel Count> : %s",info[6]);
 
 	move(13,17);
-	if(atoi(info[2])<7 && atoi(info[2])>=5)
-		printw("* * * OOPS! BE CAREFUL F!!!! * * *");
-	else if(atoi(info[2])<5 && atoi(info[2]) >=3)
-		printw("* * * SMART GUY~~~!! * * *");
-	else if(atoi(info[2])<3)
-		printw("* * * YOU ARE 'A'!! LET'S GET IT!! * * *");
+	if(atoi(info[6])<7 && atoi(info[6])>=5)
+		printw("* * * MANY Counsel Counts! AWESOME!! * * *");
+	else if(atoi(info[6])<5 && atoi(info[6]) >=4)
+		printw("* * * It's OKAY~! * * *");
+	else if(atoi(info[6])<=3)
+		printw("* * * Please VISIT YOUR PROFESSOR..! * * *");
 
 
 }
