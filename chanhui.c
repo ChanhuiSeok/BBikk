@@ -363,9 +363,9 @@ int counsel(){
 	
 	wrefresh(my_win);
 	move(9,16);
-	printw("<Professor Name> : %s",info[5]);
+	printw("<Professor Name> : %s",info[8]);
 	move(11,16);
-	printw("<Counsel Count> : %s",info[6]);
+	printw("<Counsel Count> : %s",info[9]);
 
 	move(13,17);
 	if(atoi(info[6])<7 && atoi(info[6])>=5)
@@ -441,11 +441,19 @@ int library(){
 	
 	wrefresh(bor_win);
 	wrefresh(late_win);
+	//borrow list
 	move(9, 13);
 	printw("%s", info[3]);
-	
-	move(9, 44);
+	move(11, 13);
 	printw("%s", info[4]);
+	move(13, 13);
+	printw("%s", info[5]);
+	move(15, 13);
+	printw("%s", info[6]);
+
+	//overdue list
+	move(9, 44);
+	printw("%s", info[7]);
 
 	move(23, 5);
 	if( (ch = getch()) == '0'){
