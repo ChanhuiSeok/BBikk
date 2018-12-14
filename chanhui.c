@@ -113,6 +113,10 @@ int start(){
 		sleep(1);
 		menu(barcode);
 	}
+	else if(!strcmp(barcode,"20151132331")){
+		sleep(1);
+		menu(barcode);
+	}
 
 //	scanw("%d",&ch);
 
