@@ -21,6 +21,9 @@
 char * info[8];
 char barcode[50];
 int menu();
+int counsel();
+int library();
+int attend();
 int diary();
 int start();
 
