@@ -1,0 +1,8 @@
+if(hello[2]<7 && hello[2] >=5)
+   "Be careful FFFFFF"
+
+else if (hello[2] < 5 && hello[2] >=3)
+   "Smart Guy~"
+
+else if ("hello[2] <3)
+   "A!! let's get it"
